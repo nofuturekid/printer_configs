@@ -1,0 +1,91 @@
+[server]
+host = 0.0.0.0
+port = 7125
+klippy_uds_address = /tmp/klippy_uds
+max_upload_size = 1024
+enable_debug_logging = False
+
+[database]
+database_path = ~/.moonraker_database
+
+[data_store]
+temperature_store_size = 1200
+gcode_store_size = 1000
+
+[job_queue]
+load_on_startup = False
+automatic_transition = False
+
+[machine]
+provider = systemd_dbus
+
+[secrets]
+secrets_path = /home/pi/klipper_config/moonraker_secrets.ini
+
+[authorization]
+login_timeout = 90
+trusted_clients = 
+	10.0.0.0/8
+	127.0.0.0/8
+	169.254.0.0/16
+	172.16.0.0/12
+	192.168.0.0/16
+	FE80::/10
+	::1/128
+cors_domains = 
+	*.lan
+	*.local
+	*://my.mainsail.xyz
+	*://app.fluidd.xyz
+	*:7136
+force_logins = False
+
+[file_manager]
+config_path = /home/pi/klipper_config
+log_path = /home/pi/klipper_logs
+queue_gcode_uploads = False
+enable_object_processing = True
+
+[octoprint_compat]
+
+[history]
+
+[zeroconf]
+
+[update_manager]
+enable_repo_debug = False
+enable_auto_refresh = True
+refresh_interval = 12
+enable_system_updates = True
+enable_packagekit = True
+channel = dev
+
+[update_manager mainsail]
+type = web
+channel = beta
+repo = mainsail-crew/mainsail
+path = ~/mainsail
+
+[update_manager fluidd]
+type = web
+channel = stable
+repo = fluidd-core/fluidd
+path = ~/fluidd
+
+[update_manager pgcode]
+type = git_repo
+path = ~/pgcode
+origin = https://github.com/Kragrathea/pgcode.git
+primary_branch = main
+is_system_service = False
+
+[update_manager KlipperScreen]
+type = git_repo
+path = /home/pi/KlipperScreen
+origin = https://github.com/jordanruthe/KlipperScreen.git
+primary_branch = master
+env = /home/pi/.KlipperScreen-env/bin/python
+requirements = scripts/KlipperScreen-requirements.txt
+install_script = scripts/KlipperScreen-install.sh
+is_system_service = True
+
